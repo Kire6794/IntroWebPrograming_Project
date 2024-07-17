@@ -233,3 +233,9 @@ npm-debug.log
 
 # Yarn
 yarn-error.log
+/.vs/IntroWebPrograming_Project/config/applicationhost.config
+/.vs/IntroWebPrograming_Project/v17/.wsuo
+/.vs/VSWorkspaceState.json
+/.vs/ProjectSettings.json
+/.vs/IntroWebPrograming_Project/v17/DocumentLayout.json
+*.vsidx
