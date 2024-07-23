@@ -3,14 +3,6 @@ body {
     font-family: Arial, serif;
     font-weight: 400;
     font-style: normal;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    text-align: center;
-    background-color: #222831;
-    padding: 10px;
 }
 
 ul {
@@ -19,161 +11,50 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #222831;
-    text-align: center;
 }
 
-ul li {
-    display: inline;
+li {
+    float: left;
 }
 
-ul li a {
-    display: inline-block;
+li a {
+    display: block;
     color: #00ADB5;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 
-ul li a:hover {
+li a:hover {
     background-color: #EEEEEE;
 }
 
 #name {
     background-color: #00ADB5;
-    color: #393E46;
-    font-size: xx-large;
-    font-weight: bold;
     text-align: center;
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 10px;
+    font-size: xx-large;
+    color: #393E46;
+    font-weight: bold;
 }
 
 #footer {
     text-align: center;
-    padding: 10px;
-    background-color: #222831;
-    color: #00ADB5;
 }
 
-
-.dashboard-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-}
-
+/* Only apply for index.html */
 #main {
     background-image: url('../img/HomeBackground.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-}
-
-.main-content h1 {
-    margin-bottom: 20px;
-}
-
-.main-content a {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #00ADB5;
-    color: #393E46;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.main-content a:hover {
-    background-color: #EEEEEE;
-}
-
-.error {
+.error{
     color: red;
     font-style: italic;
 }
-
-.login-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-}
-
 #login-form {
     text-align: center;
 }
-
-#login-form input, #login-form button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-#login-form button {
-    background-color: #00ADB5;
-    color: #393E46;
-    border: none;
-    cursor: pointer;
-}
-
-#login-form button:hover {
-    background-color: #EEEEEE;
-}
-
-.signup-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-}
-
-.form-card {
-    background: #FFFFFF;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-#signup-form input,
-#signup-form select,
-#signup-form button {
-    margin: 10px 0;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#signup-form input:focus,
-#signup-form select:focus,
-#signup-form button:focus {
-    border-color: #00ADB5;
-    outline: none;
-}
-
-#signup-form button {
-    background-color: #00ADB5;
-    color: #FFFFFF;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#signup-form button:hover {
-    background-color: #007B7F;
-}
+/*
+-------------------------
+*/
