@@ -239,3 +239,4 @@ yarn-error.log
 /.vs/ProjectSettings.json
 /.vs/IntroWebPrograming_Project/v17/DocumentLayout.json
 *.vsidx
+/.vs/slnx.sqlite-journal

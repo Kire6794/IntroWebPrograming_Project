@@ -17,20 +17,20 @@ li {
     float: left;
 }
 
-li a {
-    display: block;
-    color: #00ADB5;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+    li a {
+        display: block;
+        color: #967E76;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
 
 li a:hover {
     background-color: #EEEEEE;
 }
 
 #name {
-    background-color: #00ADB5;
+    background-color: #967E76;
     text-align: center;
     font-size: xx-large;
     color: #393E46;
@@ -46,6 +46,8 @@ li a:hover {
     background-image: url('../img/HomeBackground.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    
+    padding-bottom: 10%;
 }
 
 .error{
@@ -54,10 +56,30 @@ li a:hover {
 }
 #login-form {
     text-align: center;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+#space {
+    padding-top: 25%;
+}
+
+#login-button {
+    background-color: #B7C4CF;
+    border: 3px solid #967E76;
+    border-radius: 12px;
+    padding: 5px;
+    width:40%;
+}
+
+#login {
+    width: 50%;
+    height:30px;
 }
 /*
 -------------------------
 */
+/* Only apply for signup.html */
 .signup-content,
 .profile-content {
     display: flex;
@@ -115,3 +137,8 @@ li a:hover {
 #profile-form button:hover {
     background-color: #007B7F;
 }
+
+/*
+-------------------------
+*/
+
