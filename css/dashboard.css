@@ -1,0 +1,9 @@
+.bar-g {
+    display: inline-block;
+    width: 40px;
+}
+
+.bar-g-content {
+    width: 40px;
+    text-align: center;
+}
