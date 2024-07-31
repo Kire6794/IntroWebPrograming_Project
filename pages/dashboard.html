@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="../js/dashboard.js"></script>
     <link rel="stylesheet" href="../css/dashboard.css">
+    <script src="../js/common.js"></script>
+    <script src="../js/dashboard.js"></script>
     <title>Dashboard Page</title>
 </head>
 <body>
@@ -18,8 +19,12 @@
             <li><a href="add-studio.html">Add Studio</a></li>
             <li><a href="update-studio.html">Update Studio</a></li>
             <li><a href="profile.html">Update Profile</a></li>
+
+            <li class="f-right"><button type="button" id="logout">Logout</button></li>
+            <li class="f-right"><span id="username">User name</span></li>
         </ul>
     </div>
+
 
     <h1 id="name">Dashboard</h1>
     <div id="graph-table">

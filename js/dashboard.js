@@ -1,3 +1,11 @@
+//Section session
+let user = CheckLoggedUser();
+console.log(user.name);
+//Section session
+
+
+
+//Section graph: Type of Studios
 const selectorBar = `<div class="bar-g" style="{style-bar-g}">
             <div class="bar-g-content" style="{style-bar-g-content}">
                 {value}
@@ -52,17 +60,24 @@ function drawGraph(dataGraph) {
 
     $("#graph-table").html(tableSelectorMod);
 }
-
+//Section graph: Type of Studios
 $(document).ready(function () {
     let dataGraph = {
         name: "Type of Studios",
         aData: [
-            { name: "House", percentage: 100, rgbC: randomRGB() },
-            { name: "Condo", percentage: 80, rgbC: randomRGB() },
-            { name: "Apartment", percentage: 18, rgbC: randomRGB() },
-            { name: "Town House", percentage: 30, rgbC: randomRGB() },
+            { name: "Art Studio", percentage: 100, rgbC: randomRGB() },
+            { name: "Recording Studio", percentage: 80, rgbC: randomRGB() },
+            { name: "Dance Studio", percentage: 18, rgbC: randomRGB() },
+            { name: "Rehearsal space", percentage: 30, rgbC: randomRGB() },
             { name: "Others", percentage: 10, rgbC: randomRGB() }
         ]
     }
     drawGraph(dataGraph);
+
+    $("#logout").click(function () {
+        DeleteSession();
+    });
+
+    $("#username").html(user.name);
 });
+

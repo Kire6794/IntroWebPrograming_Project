@@ -8,7 +8,8 @@ function ValidateEmail() {
     if ($("#login-form").valid()) {
         let email = document.getElementById("login").value;
         if (email === person.email) {
-            window.location.href = "pages/dashboard.html";
+            SetSession(person);
+            GotoDashboard();
         } else {
             alert("Email address is not exist, please try again.");
         }
@@ -16,3 +17,15 @@ function ValidateEmail() {
     }
 
 }
+
+function GotoDashboard() {
+    window.location.href = "pages/dashboard.html";
+}
+
+let user = GetSession();
+
+$(document).ready(function () {
+    if (user !== null) {
+        GotoDashboard();
+    }
+});
