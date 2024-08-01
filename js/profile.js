@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loggedInUser) {
         // Display current user information in the view card
         document.getElementById('current-name').innerText = loggedInUser.name;
-        document.getElementById('current-phone').innerText = loggedInUser.phone;
+        document.getElementById('current-phone').innerText = loggedInUser.phoneNumber;
         document.getElementById('current-email').innerText = loggedInUser.email;
 
         // Pre-fill the update form with current user information
         document.getElementById('profile-name').value = loggedInUser.name;
-        document.getElementById('profile-phone').value = loggedInUser.phone;
+        document.getElementById('profile-phone').value = loggedInUser.phoneNumber;
         document.getElementById('profile-email').value = loggedInUser.email;
 
         // Display the logged-in user's name in the header
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if the user is found
         if (userIndex !== -1) {
             // Update the user's information
-            users[userIndex] = { ...users[userIndex], name: updatedName, phone: updatedPhone, email: updatedEmail };
+            users[userIndex] = { ...users[userIndex], name: updatedName, phoneNumber: updatedPhone, email: updatedEmail };
             // Save the updated users array to localStorage
             localStorage.setItem('users', JSON.stringify(users));
             // Update the logged-in user information in localStorage
