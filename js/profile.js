@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const profileForm = document.getElementById('profile-form');
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    const loggedInUser = CheckLoggedUser(); // Use session management functions
 
     // Check if a user is logged in
     if (loggedInUser) {
@@ -13,10 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profile-name').value = loggedInUser.name;
         document.getElementById('profile-phone').value = loggedInUser.phone;
         document.getElementById('profile-email').value = loggedInUser.email;
+
+        // Display the logged-in user's name in the header
+        document.getElementById('username').innerText = loggedInUser.name;
     }
 
+    // Event listener for form submission
     profileForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent the default form submission
 
         // Collect updated form values
         const updatedName = document.getElementById('profile-name').value;
@@ -35,16 +39,25 @@ document.addEventListener('DOMContentLoaded', function() {
             // Save the updated users array to localStorage
             localStorage.setItem('users', JSON.stringify(users));
             // Update the logged-in user information in localStorage
-            localStorage.setItem('loggedInUser', JSON.stringify(users[userIndex]));
+            SetSession(users[userIndex]);
 
             // Update the view card with the new information
             document.getElementById('current-name').innerText = updatedName;
             document.getElementById('current-phone').innerText = updatedPhone;
             document.getElementById('current-email').innerText = updatedEmail;
 
+            // Update the username in the header
+            document.getElementById('username').innerText = updatedName;
+
             alert('Profile updated successfully!');
         } else {
             alert('User not found.');
         }
+    });
+
+    // Event listener for logout button
+    document.getElementById('logout').addEventListener('click', function() {
+        DeleteSession(); // Remove the logged-in user from localStorage
+        alert('Logged out successfully!');
     });
 });
