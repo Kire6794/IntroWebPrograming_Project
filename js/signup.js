@@ -3,18 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listener for form submission
     signupForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent the default form submission
 
         // Collect form values
         const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
+        const phoneNumber = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
         const role = document.getElementById('role').value;
 
         // Create a new user object
         const newUser = {
             name: name,
-            phone: phone,
+            phoneNumber: phoneNumber,
             email: email,
             role: role
         };
@@ -27,13 +27,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (existingUser) {
             alert('User with this email already exists.');
-            return;
+            return; // Stop further execution if user exists
         }
 
+        // Add the new user to the users array
         users.push(newUser);
-        
+
         // Save the updated users array to localStorage
         localStorage.setItem('users', JSON.stringify(users));
+
+        // Set the new user session
+        SetSession(newUser);
 
         // Display a success message and redirect to the homepage
         alert('Account created successfully!');
