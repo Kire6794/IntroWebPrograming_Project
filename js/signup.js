@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signup-form');
 
+    // Load users from users.json if localStorage is empty
+    if (!localStorage.getItem('users')) {
+        fetch('../users.json')
+            .then(response => response.json())
+            .then(data => localStorage.setItem('users', JSON.stringify(data)))
+            .catch(error => console.error('Error loading users:', error));
+    }
+
     // Event listener for form submission
     signupForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
