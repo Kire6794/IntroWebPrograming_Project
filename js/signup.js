@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signup-form');
 
-    // Load users from users.json if localStorage is empty
+    // Load users from JSON file if not already loaded
     if (!localStorage.getItem('users')) {
-        fetch('../users.json')
+        fetch('../data/users.json')
             .then(response => response.json())
-            .then(data => localStorage.setItem('users', JSON.stringify(data)))
-            .catch(error => console.error('Error loading users:', error));
+            .then(data => {
+                localStorage.setItem('users', JSON.stringify(data));
+            });
     }
 
     // Event listener for form submission

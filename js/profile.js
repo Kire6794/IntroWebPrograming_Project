@@ -2,34 +2,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileForm = document.getElementById('profile-form');
     const loggedInUser = CheckLoggedUser(); // Use session management functions
 
-    // Load users from users.json if localStorage is empty
+    // Load users from JSON file if not already loaded
     if (!localStorage.getItem('users')) {
-        fetch('../users.json')
+        fetch('../data/users.json')
             .then(response => response.json())
             .then(data => {
                 localStorage.setItem('users', JSON.stringify(data));
-                initializeProfile(loggedInUser);
-            })
-            .catch(error => console.error('Error loading users:', error));
+                updateProfileUI(loggedInUser);
+            });
     } else {
-        initializeProfile(loggedInUser);
+        updateProfileUI(loggedInUser);
     }
 
-    function initializeProfile(user) {
+    function updateProfileUI(loggedInUser) {
         // Check if a user is logged in
-        if (user) {
+        if (loggedInUser) {
             // Display current user information in the view card
-            document.getElementById('current-name').innerText = user.name;
-            document.getElementById('current-phone').innerText = user.phoneNumber;
-            document.getElementById('current-email').innerText = user.email;
+            document.getElementById('current-name').innerText = loggedInUser.name;
+            document.getElementById('current-phone').innerText = loggedInUser.phoneNumber;
+            document.getElementById('current-email').innerText = loggedInUser.email;
 
             // Pre-fill the update form with current user information
-            document.getElementById('profile-name').value = user.name;
-            document.getElementById('profile-phone').value = user.phoneNumber;
-            document.getElementById('profile-email').value = user.email;
+            document.getElementById('profile-name').value = loggedInUser.name;
+            document.getElementById('profile-phone').value = loggedInUser.phoneNumber;
+            document.getElementById('profile-email').value = loggedInUser.email;
 
             // Display the logged-in user's name in the header
-            document.getElementById('username').innerText = user.name;
+            document.getElementById('username').innerText = loggedInUser.name;
         }
     }
 
