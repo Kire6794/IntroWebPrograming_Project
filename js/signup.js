@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load users from JSON file if not already loaded
     if (!localStorage.getItem('users')) {
-        fetch('../data/users.json')
+        fetch('../json/users.json')
             .then(response => response.json())
             .then(data => {
                 localStorage.setItem('users', JSON.stringify(data));
