@@ -1,26 +1,22 @@
-let person = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    phoneNumber: "123-456-7890"
-};
-
 function ValidateEmail() {
-    if ($("#login-form").valid()) {
-        let email = document.getElementById("login").value;
-        if (email === person.email) {
-            SetSession(person);
-            GotoDashboard();
-        } else {
-            alert("Email address is not exist, please try again.");
-        }
-
-    }
-
+    fetch('../json/users.json')
+        .then(response => response.json())
+        .then(users => {
+            debugger;
+            let person = users.find((person) => person.email == $("#login").val()); //find array https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+            if (typeof person !== 'undefined') {
+                SetSession(person);
+                GotoDashboard();
+            } else {
+                alert("Email address is not exist, please try again.");
+            }
+        });
 }
 
 function GotoDashboard() {
-    window.location.href = "pages/dashboard.html";
+    window.location.href = "../pages/dashboard.html";
 }
+
 
 let user = GetSession();
 

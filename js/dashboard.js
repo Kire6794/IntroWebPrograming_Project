@@ -74,10 +74,6 @@ $(document).ready(function () {
     }
     drawGraph(dataGraph);
 
-    $("#logout").click(function () {
-        DeleteSession();
-    });
 
-    $("#username").html(user.name);
 });
 

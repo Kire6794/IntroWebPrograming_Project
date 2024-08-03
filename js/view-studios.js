@@ -1,13 +1,17 @@
 let aStudios = [];
+let aUsers = [];
 
-async function getStudios() {
+let user = CheckLoggedUser();
+console.log(user.name);
+
+function getStudios() {
     try {
-        const response = await fetch('../json/studios.json');
-
-        if (!response.ok) {
-            throw new Error(response.statusText);
+        aStudios = JSON.parse(localStorage.getItem(sessionStudios));
+        if (user.role === ownerRole) { //In case the user logged is an owner, the studios will be filtered by the id of the owner
+            aStudios = aStudios.filter((studio) => studio.IdOwner == user.id);
+        } else {
+            aStudios = aStudios.filter((studio) => studio.Available == "Yes");
         }
-        aStudios = await response.json();
         fillDataStudios();
     } catch (error) {
         console.error('Error:', error);
@@ -30,9 +34,13 @@ const rowStudio = `<tr>
 
 function fillDataStudios(){
     let dataBodyTable = '';
-    aStudios.forEach(function(studio){
-        dataBodyTable = dataBodyTable.concat(replaceObjectRow(studio));
-    })
+    if (aStudios.length > 0) {
+        aStudios.forEach(function (studio) {
+            dataBodyTable = dataBodyTable.concat(replaceObjectRow(studio));
+        })
+    } else {
+        dataBodyTable = '<tr><td colspan="11"><center>No studios found</center></td></tr>'
+    }
     $("#studios tbody").html(dataBodyTable)
 }
 
@@ -45,17 +53,57 @@ function replaceObjectRow(studio){
     return row;
 }
 
-const iTagTable = '<i class="material-icons">{FontCode}</i>';
+const iTagTable = '<i onclick="functionAction({ActionCode},{StudioId})" class="material-icons">{FontCode}</i>';
 const showInfoIconCode = 'visibility';
 const priceIconCode = 'paid';
+const editIconCode = 'edit';
+const deleteIconCode = 'delete';
+const ownerInfoIconCode = 'person';
 
 function replaceActionRow(studio){ //Google Fonts icon - https://fonts.google.com/icons?icon.set=Material+Icons&selected=Material+Icons+Outlined:home:&icon.size=24&icon.color=%23e8eaed
     let actionRow = '';
-    actionRow = actionRow.concat(iTagTable.replace('{FontCode}', showInfoIconCode));
-    if(true){ //Use the user property to show action
-        actionRow = actionRow.concat(iTagTable.replace('{FontCode}', priceIconCode));
+    if (user.role === ownerRole) {
+        actionRow = actionRow.concat(iTagTable.replace('{FontCode}', editIconCode).replace('{ActionCode}', 2));
+        actionRow = actionRow.concat(iTagTable.replace('{FontCode}', deleteIconCode).replace('{ActionCode}', 3));
+    } else { //renter role
+        actionRow = actionRow.concat(iTagTable.replace('{FontCode}', ownerInfoIconCode).replace('{ActionCode}', 5));
     }
-    return actionRow;
+    return actionRow.replaceAll('{StudioId}', studio.idStudio);
 }
 
-getStudios();
+function functionEditStudio(studioId) {
+    window.location.href = "update-studio.html?studioId=" + studioId;
+}
+function functionDeleteStudio(studioId) {
+    let localStorageStudios = JSON.parse(localStorage.getItem(sessionStudios));
+    localStorageStudios = localStorageStudios.filter((studio) => studio.idStudio != studioId);
+    localStorage.setItem(sessionStudios, JSON.stringify(localStorageStudios));
+    getStudios();
+}
+
+function functionShowOwnerInfo(studioId) {
+    let idOwner = aStudios.find((studio) => studio.idStudio == studioId).IdOwner;
+    let owner = aUsers.find((user) => user.id == idOwner);
+    alert(`Owner Info
+    Name: ${owner.name}
+    Phone Number: ${owner.phoneNumber}
+    Email: ${owner.email}`);
+}
+
+function functionAction(actionCode, studioId) {
+    switch (actionCode) {
+        case 2:
+            functionEditStudio(studioId);
+            break;
+        case 3:
+            functionDeleteStudio(studioId);
+            break;
+        case 5:
+            functionShowOwnerInfo(studioId);
+            break;
+    }
+}
+$(document).ready(function () {
+    getStudios();
+    aUsers = JSON.parse(localStorage.getItem(sessionUsers));
+});

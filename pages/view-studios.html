@@ -5,7 +5,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+    <script src="../js/common.js"></script>
     <script src="../js/view-studios.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/view-studios.css">
     <title>Studio Listings Page</title>
 </head>
@@ -18,6 +20,9 @@
             <li><a href="add-studio.html">Add Studio</a></li>
             <li><a href="update-studio.html">Update Studio</a></li>
             <li><a href="profile.html">Update Profile</a></li>
+
+            <li class="f-right"><button type="button" id="logout">Logout</button></li>
+            <li class="f-right"><span id="username">User name</span></li>
         </ul>
     </div>
     
@@ -41,11 +46,5 @@
 
             </tbody>
         </table>
-
-
-
     </div>
-    <footer id="footer">
-        <p>&copy; 2024 Studio Finder. All rights reserved.</p>
-    </footer>
 </body>
