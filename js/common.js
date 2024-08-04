@@ -6,7 +6,6 @@ const ownerRole = "studio-owner";
 const renterRole = "renter";
 
 function SetSession(person) {
-    debugger;
     localStorage.setItem(sessionUser, JSON.stringify(person));
     getStudios();
     getUsers();

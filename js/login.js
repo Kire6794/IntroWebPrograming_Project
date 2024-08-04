@@ -2,7 +2,6 @@ function ValidateEmail() {
     fetch('../json/users.json')
         .then(response => response.json())
         .then(users => {
-            debugger;
             let person = users.find((person) => person.email == $("#login").val()); //find array https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
             if (typeof person !== 'undefined') {
                 SetSession(person);
