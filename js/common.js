@@ -1,8 +1,14 @@
 const sessionUser = "sessionUser";
+const sessionStudios = "sessionStudios";
+const sessionUsers = "users";
 
+const ownerRole = "studio-owner";
+const renterRole = "renter";
 
 function SetSession(person) {
     localStorage.setItem(sessionUser, JSON.stringify(person));
+    getStudios();
+    getUsers();
 }
 
 function GetSession() {
@@ -16,6 +22,8 @@ function GetSession() {
 
 function DeleteSession() {
     localStorage.removeItem(sessionUser);
+    localStorage.removeItem(sessionStudios);
+    localStorage.removeItem(sessionUsers);
     CheckLoggedUser();
 }
 
@@ -27,3 +35,34 @@ function CheckLoggedUser() {
         return user;
     }
 }
+
+function getStudios() {
+    // Load studios from JSON file if not already loaded
+    if (!localStorage.getItem(sessionStudios)) {
+        fetch('../json/studios.json')
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem(sessionStudios, JSON.stringify(data));
+            });
+    }
+}
+function getUsers() {
+    // Load users from JSON file if not already loaded
+    if (!localStorage.getItem(sessionUsers)) {
+        fetch('../json/users.json')
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem(sessionUsers, JSON.stringify(data));
+            });
+    }
+}
+
+$(document).ready(function () {
+    $("#logout").click(function () {
+        DeleteSession();
+    });
+
+    if (typeof user !== 'undefined' && user !== null) {
+        $("#username").html(user.name);
+    }
+});

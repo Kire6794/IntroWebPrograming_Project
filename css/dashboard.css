@@ -14,3 +14,24 @@
     padding: 14px 16px;
     text-decoration: none;
 }
+
+#dashboard-table {
+    width: 100%;
+    background-color: #EEEEEE;
+}
+
+#studio-list > li {
+    float: none !important;
+}
+
+#studio-list {
+    background-color: #F7DCB9;
+    text-align:center;
+}
+
+#im {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}

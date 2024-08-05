@@ -1,4 +1,4 @@
-/* Only apply for signup.html */
+/* Only apply for signup.html and profile.html */
 .signup-content,
 .profile-content {
     display: flex;
@@ -13,18 +13,24 @@
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    
     text-align: left;
     margin: 20px 0;
     width: 80%;
     max-width: 400px;
 }
 
+#signup-form input#name {
+    background-color: white; /* Specific rule for input with id 'name' */
+    text-align: left;
+}
+
 #signup-form input,
 #signup-form select,
 #signup-form button,
 #profile-form input,
-#profile-form button {
+#profile-form button,
+#signup-form input#name {
     margin: 10px 0;
     padding: 15px;
     font-size: 16px;
