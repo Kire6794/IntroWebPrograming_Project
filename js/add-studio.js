@@ -1,63 +1,61 @@
-$(document).ready(function() {
-    // Validate the form on submit
-    $("#add-studio-form").validate({
-        rules: {
-            studioName: {
-                required: true,
-                minlength: 3
-            },
-            location: {
-                required: true,
-                minlength: 3
-            },
-            description: {
-                required: true,
-                minlength: 10
-            }
-        },
-        messages: {
-            studioName: {
-                required: "Please enter the studio name",
-                minlength: "Studio name must be at least 3 characters long"
-            },
-            location: {
-                required: "Please enter the location",
-                minlength: "Location must be at least 3 characters long"
-            },
-            description: {
-                required: "Please enter a description",
-                minlength: "Description must be at least 10 characters long"
-            }
-        },
-        submitHandler: function(form) {
-            // Call the function to submit the form data
-            submitForm();
-        }
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    const addStudioForm = document.getElementById('add-studio-form');
+    const studioList = document.getElementById('studio-list');
 
-    // Function to handle form submission
-    function submitForm() {
-        // Gather form data
-        var formData = {
-            studioName: $("#studioName").val(),
-            location: $("#location").val(),
-            description: $("#description").val()
+    const saveStudios = (studios) => {
+        localStorage.setItem('studios', JSON.stringify(studios));
+    };
+
+    const loadStudios = () => {
+        const studios = JSON.parse(localStorage.getItem('studios')) || [];
+        studios.forEach(studio => {
+            addStudioToDOM(studio);
+        });
+    };
+
+    const addStudioToDOM = (studio) => {
+        const studioItem = document.createElement('div');
+        studioItem.className = 'studio-item';
+        studioItem.innerHTML = `
+            <strong>Name:</strong> ${studio.name} <br>
+            <strong>Location:</strong> ${studio.location} <br>
+            <strong>Description:</strong> ${studio.description} <br>
+            <strong>Area:</strong> ${studio.area} sq meters <br>
+            <strong>Type:</strong> ${studio.type} <br>
+            <strong>Capacity:</strong> ${studio.capacity} people <br>
+            <strong>Parking:</strong> ${studio.parking ? 'Yes' : 'No'} <br>
+            <strong>Public Transport:</strong> ${studio.publicTransport ? 'Yes' : 'No'} <br>
+            <strong>Availability:</strong> ${studio.availability ? 'Yes' : 'No'} <br>
+            <strong>Rental Term:</strong> ${studio.rentalTerm} <br>
+            <strong>Price:</strong> $${studio.price}
+        `;
+        studioList.appendChild(studioItem);
+    };
+
+    addStudioForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const studio = {
+            name: document.getElementById('studioName').value,
+            location: document.getElementById('location').value,
+            description: document.getElementById('description').value,
+            area: document.getElementById('area').value,
+            type: document.getElementById('type').value,
+            capacity: document.getElementById('capacity').value,
+            parking: document.getElementById('parking').checked,
+            publicTransport: document.getElementById('publicTransport').checked,
+            availability: document.getElementById('availability').checked,
+            rentalTerm: document.getElementById('rentalTerm').value,
+            price: document.getElementById('price').value
         };
 
-        // Send form data to the server using AJAX
-        $.ajax({
-            type: "POST",
-            url: "server_endpoint_here", // Replace with your server endpoint
-            data: formData,
-            success: function(response) {
-                // Handle successful response
-                alert("Studio added successfully!");
-                $("#add-studio-form")[0].reset(); // Reset the form
-            },
-            error: function(xhr, status, error) {
-                // Handle errors
-                alert("An error occurred: " + error);
-            }
-        });
-    }
+        addStudioToDOM(studio);
+
+        const studios = JSON.parse(localStorage.getItem('studios')) || [];
+        studios.push(studio);
+        saveStudios(studios);
+
+        addStudioForm.reset();
+    });
+
+    loadStudios();
 });
