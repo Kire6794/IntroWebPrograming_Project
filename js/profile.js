@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileForm = document.getElementById('profile-form');
     const loggedInUser = CheckLoggedUser(); // Use session management functions
 
+    if (loggedInUser.role == "renter") {
+        document.getElementById('addStudio').style.display = 'none';
+        document.getElementById('updateStudio').style.display = 'none';
+    }
+
+
     // Load users from JSON file if not already loaded
     if (!localStorage.getItem('users')) {
         fetch('../json/users.json')
