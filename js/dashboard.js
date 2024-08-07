@@ -166,7 +166,7 @@ $(document).ready(function () {
     LastStudiosAdded();
     let dataGraphPriceRange = {
         idGraph: "#graph-table",
-        name: "PriceRange",
+        name: "Price Range",
         aData: [
             { name: aPriceRange[0].name, percentage: aPriceRange[0].percentage, rgbC: randomRGB() },
             { name: aPriceRange[1].name, percentage: aPriceRange[1].percentage, rgbC: randomRGB() },

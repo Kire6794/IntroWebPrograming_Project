@@ -1,5 +1,5 @@
 const sessionUser = "sessionUser";
-const sessionStudios = "sessionStudios";
+const sessionStudios = "studios";
 const sessionUsers = "users";
 
 const ownerRole = "studio-owner";
