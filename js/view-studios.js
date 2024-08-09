@@ -155,6 +155,10 @@ function filterStudios() {
 }
 
 $(document).ready(function () {
+    if (user.role == "renter") {
+        document.getElementById('addStudio').style.display = 'none';
+        document.getElementById('updateStudio').style.display = 'none';
+    }
     getStudios();
     aUsers = JSON.parse(localStorage.getItem(sessionUsers));
 

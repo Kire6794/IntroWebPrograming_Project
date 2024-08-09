@@ -10,11 +10,12 @@
 <body>
     <header>
         <ul>
-            <li><a href="../index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="view-studios.html">Studio Listings</a></li>
-            <li><a href="add-studio.html">Add Studio</a></li>
-            <li><a href="update-studio.html">Update Studio</a></li>
-            <li><a href="profile.html">Update Profile</a></li>
+            <li id="addStudio"><a href="add-studio.html">Add Studio</a></li>
+            <li id="updateStudio"><a href="update-studio.html">Update Studio</a></li>
+
+
             <li class="f-right"><button type="button" id="logout">Logout</button></li>
             <li class="f-right"><span id="username">User name</span></li>
         </ul>
@@ -43,6 +44,7 @@
     <footer id="footer">
         <p>&copy; 2024 Studio Finder. All rights reserved.</p>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/profile.js"></script>
 </body>

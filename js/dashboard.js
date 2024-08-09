@@ -1,6 +1,6 @@
 //Section session
 let user = CheckLoggedUser();
-console.log(user.name);
+console.log(user.role);
 //Section session
 
 
@@ -152,12 +152,15 @@ function getNext() {
     setTimeout(function () {
         getNext();
     }, 6000);
-    //document.getElementById("im").src = img[posicion];
 }
 
 //#endregion
 
 $(document).ready(function () {
+    if (user.role == "renter") {
+        document.getElementById('addStudio').style.display = 'none';
+        document.getElementById('updateStudio').style.display = 'none';
+    }
     getNext();
     getStudios();
     fillDataForGraph();
