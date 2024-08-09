@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Studio - Creative Studio Finder</title>
+    <title>Add Studio - Creative Studio Finder</title>
     <link rel="stylesheet" href="../css/add-studio.css">
 </head>
 <body>
@@ -15,12 +15,8 @@
         </ul>
     </header>
     <main>
-        <h1>Update Studio</h1>
-        <form id="update-studio-form">
-            <div class="form-group">
-                <label for="studioId">Studio ID:</label>
-                <input type="number" id="studioId" name="studioId" required>
-            </div>
+        <h1>Add a New Studio</h1>
+        <form id="add-studio-form">
             <div class="form-group">
                 <label for="studioName">Studio Name:</label>
                 <input type="text" id="studioName" name="studioName" required>
@@ -75,8 +71,9 @@
                 <label for="price">Price:</label>
                 <input type="number" id="price" name="price" required>
             </div>
-            <button type="submit">Update Studio</button>
+            <button type="submit">Add Studio</button>
         </form>
+        <div id="studio-list"></div>
     </main>
     <footer id="footer">
         <p>&copy; 2024 Creative Studio Finder. All rights reserved.</p>
