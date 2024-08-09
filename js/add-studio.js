@@ -1,61 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const addStudioForm = document.getElementById('add-studio-form');
-    const studioList = document.getElementById('studio-list');
+    const updateStudioForm = document.getElementById('update-studio-form');
+
+    const loadStudioData = (id) => {
+        const studios = JSON.parse(localStorage.getItem('studios')) || [];
+        return studios.find(studio => studio.idStudio == id);
+    };
 
     const saveStudios = (studios) => {
         localStorage.setItem('studios', JSON.stringify(studios));
     };
 
-    const loadStudios = () => {
-        const studios = JSON.parse(localStorage.getItem('studios')) || [];
-        studios.forEach(studio => {
-            addStudioToDOM(studio);
-        });
-    };
-
-    const addStudioToDOM = (studio) => {
-        const studioItem = document.createElement('div');
-        studioItem.className = 'studio-item';
-        studioItem.innerHTML = `
-            <strong>Name:</strong> ${studio.Name} <br>
-            <strong>Location:</strong> ${studio.Address} <br>
-            <strong>Description:</strong> ${studio.Description} <br>
-            <strong>Area:</strong> ${studio.Area} sq meters <br>
-            <strong>Type:</strong> ${studio.Type} <br>
-            <strong>Capacity:</strong> ${studio.Capacity} people <br>
-            <strong>Parking:</strong> ${studio.Parking ? 'Yes' : 'No'} <br>
-            <strong>Public Transport:</strong> ${studio.PublicTransport ? 'Yes' : 'No'} <br>
-            <strong>Availability:</strong> ${studio.Available ? 'Yes' : 'No'} <br>
-            <strong>Rental Term:</strong> ${studio.RentalTerm} <br>
-            <strong>Price:</strong> $${studio.PricePerTerm}
-        `;
-        studioList.appendChild(studioItem);
-    };
-
-    addStudioForm.addEventListener('submit', (event) => {
+    updateStudioForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        const studio = {
-            Name: document.getElementById('studioName').value,
-            Address: document.getElementById('location').value,
-            Description: document.getElementById('description').value,
-            Area: document.getElementById('area').value,
-            Type: document.getElementById('type').value,
-            Capacity: document.getElementById('capacity').value,
-            Parking: document.getElementById('parking').checked,
-            PublicTransport: document.getElementById('publicTransport').checked,
-            Available: document.getElementById('availability').checked,
-            RentalTerm: document.getElementById('rentalTerm').value,
-            PricePerTerm: document.getElementById('price').value
-        };
+        const studioId = document.getElementById('studioId').value;
+        const studioIndex = studios.findIndex(studio => studio.idStudio == studioId);
 
-        addStudioToDOM(studio);
+        if (studioIndex !== -1) {
+            const updatedStudio = {
+                idStudio: studioId,
+                Name: document.getElementById('studioName').value,
+                Address: document.getElementById('location').value,
+                Description: document.getElementById('description').value,
+                Area: document.getElementById('area').value,
+                Type: document.getElementById('type').value,
+                Capacity: document.getElementById('capacity').value,
+                Parking: document.getElementById('parking').checked,
+                PublicTransport: document.getElementById('publicTransport').checked,
+                Available: document.getElementById('availability').checked,
+                RentalTerm: document.getElementById('rentalTerm').value,
+                PricePerTerm: document.getElementById('price').value
+            };
 
-        const studios = JSON.parse(localStorage.getItem('studios')) || [];
-        studios.push(studio);
-        saveStudios(studios);
-
-        addStudioForm.reset();
+            studios[studioIndex] = updatedStudio;
+            saveStudios(studios);
+            alert('Studio updated successfully!');
+            updateStudioForm.reset();
+        } else {
+            alert('Studio not found');
+        }
     });
 
-    loadStudios();
+    document.getElementById('studioId').addEventListener('change', (event) => {
+        const studio = loadStudioData(event.target.value);
+
+        if (studio) {
+            document.getElementById('studioName').value = studio.Name;
+            document.getElementById('location').value = studio.Address;
+            document.getElementById('description').value = studio.Description;
+            document.getElementById('area').value = studio.Area;
+            document.getElementById('type').value = studio.Type;
+            document.getElementById('capacity').value = studio.Capacity;
+            document.getElementById('parking').checked = studio.Parking;
+            document.getElementById('publicTransport').checked = studio.PublicTransport;
+            document.getElementById('availability').checked = studio.Available;
+            document.getElementById('rentalTerm').value = studio.RentalTerm;
+            document.getElementById('price').value = studio.PricePerTerm;
+        } else {
+            alert('Studio not found');
+        }
+    });
 });
