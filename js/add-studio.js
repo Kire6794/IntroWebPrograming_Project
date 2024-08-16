@@ -17,17 +17,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const studioItem = document.createElement('div');
         studioItem.className = 'studio-item';
         studioItem.innerHTML = `
-            <strong>Name:</strong> ${studio.Name} <br>
-            <strong>Location:</strong> ${studio.Address} <br>
-            <strong>Description:</strong> ${studio.Description} <br>
-            <strong>Area:</strong> ${studio.Area} sq meters <br>
-            <strong>Type:</strong> ${studio.Type} <br>
-            <strong>Capacity:</strong> ${studio.Capacity} people <br>
-            <strong>Parking:</strong> ${studio.Parking ? 'Yes' : 'No'} <br>
-            <strong>Public Transport:</strong> ${studio.PublicTransport ? 'Yes' : 'No'} <br>
-            <strong>Availability:</strong> ${studio.Available ? 'Yes' : 'No'} <br>
-            <strong>Rental Term:</strong> ${studio.RentalTerm} <br>
-            <strong>Price:</strong> $${studio.PricePerTerm}
+            <strong>Name:</strong> ${studio.name} <br>
+            <strong>Location:</strong> ${studio.location} <br>
+            <strong>Description:</strong> ${studio.description} <br>
+            <strong>Area:</strong> ${studio.area} sq meters <br>
+            <strong>Type:</strong> ${studio.type} <br>
+            <strong>Capacity:</strong> ${studio.capacity} people <br>
+            <strong>Parking:</strong> ${studio.parking ? 'Yes' : 'No'} <br>
+            <strong>Public Transport:</strong> ${studio.publicTransport ? 'Yes' : 'No'} <br>
+            <strong>Availability:</strong> ${studio.availability ? 'Yes' : 'No'} <br>
+            <strong>Rental Term:</strong> ${studio.rentalTerm} <br>
+            <strong>Price:</strong> $${studio.price}
         `;
         studioList.appendChild(studioItem);
     };
@@ -35,18 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
     addStudioForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const studio = {
-            Name: document.getElementById('studioName').value,
-            Address: document.getElementById('location').value,
-            Description: document.getElementById('description').value,
-            Area: document.getElementById('area').value,
-            Type: document.getElementById('type').value,
-            Capacity: document.getElementById('capacity').value,
-            Parking: document.getElementById('parking').checked,
-            PublicTransport: document.getElementById('publicTransport').checked,
-            Available: document.getElementById('availability').checked,
-            RentalTerm: document.getElementById('rentalTerm').value,
-            PricePerTerm: document.getElementById('price').value
+            name: document.getElementById('studioName').value,
+            location: document.getElementById('location').value,
+            description: document.getElementById('description').value,
+            area: document.getElementById('area').value,
+            type: document.getElementById('type').value,
+            capacity: document.getElementById('capacity').value,
+            parking: document.getElementById('parking').checked,
+            publicTransport: document.getElementById('publicTransport').checked,
+            availability: document.getElementById('availability').checked,
+            rentalTerm: document.getElementById('rentalTerm').value,
+            price: document.getElementById('price').value
         };
+
+        // Ensure all required fields are filled
+        if (!studio.name || !studio.location || !studio.description || !studio.area || !studio.type || !studio.capacity || !studio.rentalTerm || !studio.price) {
+            alert('Please fill out all required fields.');
+            return;
+        }
 
         addStudioToDOM(studio);
 
