@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Studio</title>
+    <link rel="stylesheet" href="../css/add-studio.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Log In</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Add Studio</h1>
+        <form id="add-studio-form">
+            <label for="studioName">Studio Name:</label>
+            <input type="text" id="studioName" name="studioName" required>
+            
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+            
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+            
+            <label for="area">Area (sq meters):</label>
+            <input type="number" id="area" name="area" required>
+            
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="Art Studio">Art Studio</option>
+                <option value="Dance Studio">Dance Studio</option>
+                <option value="Music Studio">Music Studio</option>
+                <option value="Recording Studio">Recording Studio</option>
+            </select>
+            
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" name="capacity" required>
+            
+            <label for="parking">Parking:</label>
+            <input type="checkbox" id="parking" name="parking">
+            
+            <label for="publicTransport">Public Transport:</label>
+            <input type="checkbox" id="publicTransport" name="publicTransport">
+            
+            <label for="availability">Available:</label>
+            <input type="checkbox" id="availability" name="availability">
+            
+            <label for="rentalTerm">Rental Term:</label>
+            <input type="text" id="rentalTerm" name="rentalTerm" required>
+            
+            <label for="price">Price Per Term:</label>
+            <input type="number" id="price" name="price" required>
+            
+            <button type="submit">Add Studio</button>
+        </form>
+
+        <h2>Studio List</h2>
+        <div id="studio-list"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Creative Studio Finder. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/add-studio.js"></script>
+</body>
+</html>
