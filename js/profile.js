@@ -1,12 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const profileForm = document.getElementById('profile-form');
     const loggedInUser = CheckLoggedUser(); // Use session management functions
+
+    console.log('Logged in user:', loggedInUser); // Debugging line to check logged in user data
 
     if (loggedInUser.role == "renter") {
         document.getElementById('addStudio').style.display = 'none';
         document.getElementById('updateStudio').style.display = 'none';
     }
-
 
     // Load users from JSON file if not already loaded
     if (!localStorage.getItem('users')) {
@@ -35,11 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Display the logged-in user's name in the header
             document.getElementById('username').innerText = loggedInUser.name;
+        } else {
+            console.error('No logged-in user found.');
         }
     }
 
     // Event listener for form submission
-    profileForm.addEventListener('submit', function(event) {
+    profileForm.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
 
         // Collect updated form values
@@ -76,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Event listener for logout button
-    document.getElementById('logout').addEventListener('click', function() {
+    document.getElementById('logout').addEventListener('click', function () {
         DeleteSession(); // Remove the logged-in user from localStorage
         alert('Logged out successfully!');
         window.location.href = '../index.html'; // Redirect to the homepage

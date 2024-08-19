@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadStudios = () => {
         const studios = JSON.parse(localStorage.getItem('studios')) || [];
+        studioList.innerHTML = ''; // Clear the list before loading
         studios.forEach(studio => {
             addStudioToDOM(studio);
         });
@@ -27,41 +28,28 @@ document.addEventListener('DOMContentLoaded', () => {
             <strong>Public Transport:</strong> ${studio.publicTransport ? 'Yes' : 'No'} <br>
             <strong>Availability:</strong> ${studio.availability ? 'Yes' : 'No'} <br>
             <strong>Rental Term:</strong> ${studio.rentalTerm} <br>
-            <strong>Price:</strong> $${studio.price}
+            <strong>Price:</strong> $${studio.price} <br>
+            <button class="change-studio-btn" data-id="${studio.id}">Change</button>
+            <button class="delete-studio-btn" data-id="${studio.id}">Delete</button>
         `;
         studioList.appendChild(studioItem);
+
+        // Attach event listeners to buttons
+        studioItem.querySelector('.change-studio-btn').addEventListener('click', () => changeStudio(studio.id));
+        studioItem.querySelector('.delete-studio-btn').addEventListener('click', () => deleteStudio(studio.id));
     };
 
-    addStudioForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const studio = {
-            name: document.getElementById('studioName').value,
-            location: document.getElementById('location').value,
-            description: document.getElementById('description').value,
-            area: document.getElementById('area').value,
-            type: document.getElementById('type').value,
-            capacity: document.getElementById('capacity').value,
-            parking: document.getElementById('parking').checked,
-            publicTransport: document.getElementById('publicTransport').checked,
-            availability: document.getElementById('availability').checked,
-            rentalTerm: document.getElementById('rentalTerm').value,
-            price: document.getElementById('price').value
-        };
-
-        // Ensure all required fields are filled
-        if (!studio.name || !studio.location || !studio.description || !studio.area || !studio.type || !studio.capacity || !studio.rentalTerm || !studio.price) {
-            alert('Please fill out all required fields.');
-            return;
-        }
-
-        addStudioToDOM(studio);
-
+    const changeStudio = (id) => {
         const studios = JSON.parse(localStorage.getItem('studios')) || [];
-        studios.push(studio);
-        saveStudios(studios);
-
-        addStudioForm.reset();
-    });
-
-    loadStudios();
-});
+        const studio = studios.find(studio => studio.id === id);
+        if (studio) {
+            document.getElementById('studioName').value = studio.name;
+            document.getElementById('location').value = studio.location;
+            document.getElementById('description').value = studio.description;
+            document.getElementById('area').value = studio.area;
+            document.getElementById('type').value = studio.type;
+            document.getElementById('capacity').value = studio.capacity;
+            document.getElementById('parking').checked = studio.parking;
+            document.getElementById('publicTransport').checked = studio.publicTransport;
+            document.getElementById('availability').checked = studio.availability;
+            document.getElementById('rentalTerm').value =

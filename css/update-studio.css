@@ -55,10 +55,6 @@ form {
     max-width: 600px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
 label {
     display: block;
     margin-bottom: 5px;
@@ -82,6 +78,17 @@ button {
 
 button:hover {
     background-color: #222831;
+}
+
+#studio-list {
+    margin-top: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #footer {

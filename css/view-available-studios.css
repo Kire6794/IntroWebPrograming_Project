@@ -45,61 +45,37 @@ h1 {
     margin: 20px 0;
 }
 
-form {
+#studio-list {
     text-align: center;
     margin: 0 auto;
     padding: 20px;
+}
+
+.studio-card {
     background: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
     max-width: 600px;
+    display: inline-block;
+    text-align: left;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
+.studio-card h2 {
+    margin-top: 0;
 }
 
-input, textarea, select {
-    width: 100%;
-    padding: 8px;
-    margin: 0;
-    box-sizing: border-box;
+.studio-card p {
+    margin: 5px 0;
 }
 
-button {
-    background-color: #393E46;
-    color: #FFFFFF;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #222831;
-}
-
-#studio-list {
-    margin-top: 20px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+#footer {
+    text-align: center;
     padding: 20px;
-    background: #FFFFFF;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.studio-item {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #967E76;
-    border-radius: 5px;
-    background-color: #EEEEEE;
-}
-
-.studio-item button {
-    margin-top: 10px;
-    margin-right: 5px;
+    background-color: #222831;
+    color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

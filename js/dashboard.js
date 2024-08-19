@@ -1,11 +1,8 @@
-//Section session
+// Section session
 let user = CheckLoggedUser();
 console.log(user.role);
-//Section session
 
-
-
-//Section graph: Type of Studios
+// Section graph: Type of Studios
 const selectorBar = `<div class="bar-g" style="{style-bar-g}">
             <div class="bar-g-content" style="{style-bar-g-content}">
                 {value}
@@ -23,7 +20,7 @@ const tableSelector = `<table style="width: 100%;">
                 <td>{graphContent}</td>
             </tr>
             </tbody>
-        </div>`;
+        </table>`;
 const styleBarG = `height: {height}px; background-color: rgba({RGB}, 0.5); margin-right: 2px;`;
 const styleBarGContent = `height: {height}px; margin-top: {marginTop}px;`;
 
@@ -60,7 +57,7 @@ function drawGraph(dataGraph) {
 
     $(dataGraph.idGraph).html(tableSelectorMod);
 }
-//Section graph: Type of Studios
+
 let aStudios = [];
 let aPriceRange = [
     {
@@ -89,11 +86,14 @@ let totalStudios = 0;
 let lastStudiosAdded = [];
 
 function getStudios() {
-    aStudios = JSON.parse(localStorage.getItem(sessionStudios));
+    aStudios = JSON.parse(localStorage.getItem('sessionStudios') || '[]');
     totalStudios = aStudios.length;
+    console.log('Studios:', aStudios);
 }
 
 function fillDataForGraph() {
+    if (aStudios.length === 0) return;
+    aStudioType = []; // reset the array
     $.each(aStudios, function (i, studio) {
         if (studio.PricePerTerm < 200) {
             aPriceRange[0].value++;
@@ -105,16 +105,17 @@ function fillDataForGraph() {
             aPriceRange[3].value++;
         }
         let studioType = aStudioType.find((studioType) => studioType.Type == studio.Type);
-        if (typeof studioType === 'undefined') {
+        if (!studioType) {
             aStudioType.push({
                 Type: studio.Type,
                 value: 1,
                 percentage: 0
             });
         } else {
-            aStudioType.find((studioType) => studioType.Type == studio.Type).value++;
+            studioType.value++;
         }
     });
+    console.log('Studio Types:', aStudioType);
 }
 
 function updatePercentages() {
@@ -128,15 +129,19 @@ function updatePercentages() {
 }
 
 function fillLastStudiosAdded() {
-    lastStudiosAdded.push(aStudios[aStudios.length - 3]);
-    lastStudiosAdded.push(aStudios[aStudios.length - 2]);
-    lastStudiosAdded.push(aStudios[aStudios.length - 1]);
+    if (aStudios.length >= 3) {
+        lastStudiosAdded.push(aStudios[aStudios.length - 3]);
+        lastStudiosAdded.push(aStudios[aStudios.length - 2]);
+        lastStudiosAdded.push(aStudios[aStudios.length - 1]);
+    }
 }
 
 function LastStudiosAdded() {
     let htmlStudio = '';
     $.each(lastStudiosAdded, function (i, studio) {
-        htmlStudio = htmlStudio.concat(`<li>${studio.Name} - ${studio.Address}</li>`)
+        if (studio) {
+            htmlStudio = htmlStudio.concat(`<li>${studio.Name} - ${studio.Address}</li>`);
+        }
     });
     $("#studio-list").html(htmlStudio);
 }
@@ -146,27 +151,24 @@ const img = ["../img/img1.jpg", "../img/img2.jpg", "../img/img3.jpg"];
 let position = 0;
 
 function getNext() {
-    position++;
-    if (position == img.length) position = 0;
-    $("#im").attr("src", img[position])
-    setTimeout(function () {
-        getNext();
-    }, 6000);
+    position = (position + 1) % img.length;
+    $("#im").attr("src", img[position]);
+    setTimeout(getNext, 6000);
 }
-
 //#endregion
 
 $(document).ready(function () {
-    if (user.role == "renter") {
-        document.getElementById('addStudio').style.display = 'none';
-        document.getElementById('updateStudio').style.display = 'none';
+    if (user && user.role === "renter") {
+        $('#addStudio').hide();
+        $('#updateStudio').hide();
     }
     getNext();
     getStudios();
     fillDataForGraph();
     updatePercentages();
-    fillLastStudiosAdded()
+    fillLastStudiosAdded();
     LastStudiosAdded();
+    
     let dataGraphPriceRange = {
         idGraph: "#graph-table",
         name: "Price Range",
@@ -176,19 +178,17 @@ $(document).ready(function () {
             { name: aPriceRange[2].name, percentage: aPriceRange[2].percentage, rgbC: randomRGB() },
             { name: aPriceRange[3].name, percentage: aPriceRange[3].percentage, rgbC: randomRGB() },
         ]
-    }
+    };
+
     let dataGraphStudioType = {
         idGraph: "#graph-table-type",
         name: "Type of Studios",
         aData: []
-    }
+    };
     $.each(aStudioType, function (i, studioT) {
         dataGraphStudioType.aData.push({ name: studioT.Type, percentage: studioT.percentage, rgbC: randomRGB() });
     });
 
     drawGraph(dataGraphPriceRange);
     drawGraph(dataGraphStudioType);
-
-
 });
-
